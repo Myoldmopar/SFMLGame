@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd build/test
-./game_tests
+cd build
+make game_coverage
