@@ -1,6 +1,7 @@
 .idea
 cmake-build*
 sfml-app
+build
 
 # Prerequisites
 *.d

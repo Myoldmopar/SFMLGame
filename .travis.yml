@@ -1,0 +1,12 @@
+language: cpp
+
+install:
+ - apt-get install libsfml-dev
+
+before_script:
+ - mkdir build
+
+script:
+ - cd build \
+&& cmake .. \
+&& make
