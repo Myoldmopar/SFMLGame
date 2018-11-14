@@ -1,5 +1,8 @@
 language: cpp
 
+before_install:
+  - pip install --user cpp-coveralls
+
 addons:
   apt:
     packages:
@@ -7,3 +10,6 @@ addons:
 
 script:
  - scripts/build.sh && scripts/test.sh
+
+after_success:
+ - coveralls --gcov-options '\-lp'
