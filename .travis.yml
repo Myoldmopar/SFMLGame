@@ -1,12 +1,16 @@
 language: cpp
 
-install:
- - apt-get install libsfml-dev
+addons:
+  apt:
+    packages:
+    - libsfml-dev
 
 before_script:
  - mkdir build
 
 script:
  - cd build \
-&& cmake .. \
-&& make
+&& cmake .. -DBUILD_TESTING=ON \
+&& make \
+&& cd test \
+&& ./game_tests
