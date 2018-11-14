@@ -13,4 +13,4 @@ script:
  - scripts/build.sh && scripts/test.sh
 
 after_success:
- - coveralls-lcov build/game_coverage.info
+ - coveralls-lcov build/game_coverage.info.cleaned
