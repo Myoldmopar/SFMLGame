@@ -20,4 +20,3 @@ gtest_add_tests(
 
 set(COVERAGE_LCOV_EXCLUDES '/usr/*' '*gtest/*')
 setup_target_for_coverage_lcov(NAME game_coverage EXECUTABLE game_tests)
-# include(CTest)  # not sure this is needed
