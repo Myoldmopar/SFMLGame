@@ -7,6 +7,7 @@ addons:
   apt:
     packages:
     - libsfml-dev
+    - lcov
 
 script:
  - scripts/build.sh && scripts/test.sh
