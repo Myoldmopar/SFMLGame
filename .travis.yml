@@ -14,4 +14,4 @@ script:
 
 after_success:
  - coveralls --gcov-options '\-lp' -e '/usr/*' -e '*gtest/*'
- - coveralls-lcov game_coverage.info
+ - coveralls-lcov build/game_coverage.info
