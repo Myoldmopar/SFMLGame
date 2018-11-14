@@ -2,5 +2,5 @@
 
 mkdir build
 cd build
-cmake .. -DBUILD_TESTING=ON
+cmake .. -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
 make
