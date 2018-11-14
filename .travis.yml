@@ -7,10 +7,10 @@ addons:
 
 before_script:
  - mkdir build
-
-script:
- - cd build \
-&& cmake .. -DBUILD_TESTING=ON \
-&& make \
-&& cd test \
-&& ./game_tests
+#
+#script:
+# - cd build \
+#&& cmake .. -DBUILD_TESTING=ON \
+#&& make \
+#&& cd test \
+#&& ./game_tests
