@@ -13,4 +13,4 @@ script:
  - scripts/build.sh && scripts/test.sh
 
 after_success:
- - coveralls --gcov-options '\-lp'
+ - coveralls --gcov-options '\-lp' -e '/usr/*' -e '*gtest/*'
