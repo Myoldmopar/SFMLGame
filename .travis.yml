@@ -1,7 +1,7 @@
 language: cpp
 
 install:
- - gem install coveralls-lcov
+ - pip install --user cpp-coveralls
 
 addons:
   apt:
@@ -13,4 +13,4 @@ script:
  - scripts/build.sh && scripts/test.sh
 
 after_success:
- - coveralls-lcov build/game_coverage.info.cleaned
+ - coveralls --root . -E ".*CMakeFiles.*"
