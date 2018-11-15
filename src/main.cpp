@@ -9,17 +9,26 @@
 int main()
 {
     Configuration c;
-    sf::RenderWindow window(sf::VideoMode(c.initialHeight, c.initialWidth), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(c.initialWidth, c.initialHeight), "SFML works!");
+    window.setTitle("Lee Game");
+
+    unsigned int const squareSpriteSideLength = 300;
+
+    sf::CircleShape shape1(100.f);
+    shape1.setFillColor(sf::Color::Green);
 
     sf::SoundBuffer buffer;
     buffer.loadFromFile("media/sounds/punch.wav");
     sf::Sound sound;
     sound.setBuffer(buffer);
-    sound.play();
 
     sf::Event event{};
+    sf::Texture texture;
+    texture.loadFromFile("media/textures/dragonSheet.png");
+    sf::IntRect rectSourceSprite(0, 0, squareSpriteSideLength, squareSpriteSideLength);
+    sf::Sprite sprite(texture, rectSourceSprite);
+
+    sf::Clock clock;
 
     while (window.isOpen()) {
         // while there are pending events...
@@ -39,12 +48,8 @@ int main()
 
                     // key pressed
                 case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Escape) {
-                        std::cout << "the escape key was pressed" << std::endl;
-                        std::cout << "control:" << event.key.control << std::endl;
-                        std::cout << "alt:" << event.key.alt << std::endl;
-                        std::cout << "shift:" << event.key.shift << std::endl;
-                        std::cout << "system:" << event.key.system << std::endl;
+                    if (event.key.code == sf::Keyboard::Space) {
+                        sound.play();
                     }
                     break;
 
@@ -53,8 +58,40 @@ int main()
                     break;
             }
         }
+
+        // adjust which row of the sprite sheet we are on
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            rectSourceSprite.top = squareSpriteSideLength*0;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            rectSourceSprite.top = squareSpriteSideLength*1;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            rectSourceSprite.top = squareSpriteSideLength*2;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            rectSourceSprite.top = squareSpriteSideLength*3;
+        }
+
+        // adjust which column we are on based on a timer - one column per second
+        if (clock.getElapsedTime().asSeconds() > 0.5f) {
+            if (rectSourceSprite.left >= squareSpriteSideLength * 2)
+                rectSourceSprite.left = 0;
+            else
+                rectSourceSprite.left += squareSpriteSideLength;
+            clock.restart();
+        }
+
+        // then draw the appropriate region of the sprite sheet
+        sprite.setTextureRect(rectSourceSprite);
+
         window.clear();
-        window.draw(shape);
+        //window.draw(shape1);
+        window.draw(sprite);
         window.display();
     }
 

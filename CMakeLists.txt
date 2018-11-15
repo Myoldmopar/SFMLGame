@@ -40,7 +40,7 @@ if (BUILD_TESTING)
     set(TEST_SRC ${SRC_NOT_MAIN})
     list(APPEND TEST_SRC
             test/src/test_utilities.cpp
-            test/src/test_main.cpp
+            test/src/test.cpp
     )
     add_executable(game_tests ${TEST_SRC})
     if(ENABLE_COVERAGE)
