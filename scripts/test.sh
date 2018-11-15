@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd build
-./test/game_tests
+./game_tests
