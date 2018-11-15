@@ -16,6 +16,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 ### Build the main tool
 # First create a list of all the source files **except** the main function
 set(SRC_NOT_MAIN
+        include/config.hpp
+        include/utilities.hpp
+        src/config.cpp
         src/utilities.cpp
 )
 # Create a copy of this list
