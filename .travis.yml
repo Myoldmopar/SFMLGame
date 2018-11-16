@@ -14,7 +14,7 @@ before_install:
 install:
 # - $SH "add-apt-repository -y ppa:deadsnakes/ppa"
  - $SH "apt-get update"
- - $SH "apt-get install -y libsfml-dev lcov"
+ - $SH "apt-get install -y libsfml-dev lcov cmake build-essential"
 # - $SH "python3 -m pip install -q --upgrade pip"
 # - $SH "python3 -m pip install -q cpp-coveralls"
 #
