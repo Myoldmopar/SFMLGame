@@ -19,6 +19,7 @@ install:
  #- $SH "add-apt-repository -y ppa:deadsnakes/ppa"
  - $SH "apt-get install -y libsfml-dev lcov cmake"
  #- $SH "python3 -m pip install -q --upgrade pip"
+ - sudo apt-get install python3-pip
  - python3 -m pip install -q cpp-coveralls
 
 script:
