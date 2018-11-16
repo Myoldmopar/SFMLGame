@@ -12,20 +12,14 @@ before_install:
   - docker ps
 
 install:
-# - $SH "add-apt-repository -y ppa:deadsnakes/ppa"
+ - $SH "add-apt-repository -y ppa:deadsnakes/ppa"
  - $SH "apt-get update"
  - $SH "apt-get install -y libsfml-dev lcov cmake build-essential"
-# - $SH "python3 -m pip install -q --upgrade pip"
-# - $SH "python3 -m pip install -q cpp-coveralls"
-#
-#addons:
-#  apt:
-#    packages:
-#    - libsfml-dev
-#    - lcov
+ - $SH "python3 -m pip install -q --upgrade pip"
+ - $SH "python3 -m pip install -q cpp-coveralls"
 
 script:
  - $SH "scripts/build.sh && scripts/test.sh"
 
-#after_success:
-# - $SH "coveralls --root . -E \".*usr.*\" -E \".*third_party.*\" -E \".*CMakeFiles.*\" -E \".*include.*\""
+after_success:
+ - $SH "coveralls --root . -E \".*usr.*\" -E \".*third_party.*\" -E \".*CMakeFiles.*\" -E \".*include.*\""
