@@ -12,8 +12,8 @@ before_install:
   - docker ps
 
 install:
- - $SH "python3 -m pip install -q --upgrade pip"
- - $SH "python3 -m pip install -q cpp-coveralls"
+ - $SH "python -m pip install -q --upgrade pip"
+ - $SH "python -m pip install -q cpp-coveralls"
 
 addons:
   apt:
