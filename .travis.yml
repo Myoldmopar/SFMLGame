@@ -12,8 +12,8 @@ before_install:
   - docker ps
 
 install:
- - $SH "apt-get install -y locales"
- - $SH "locale-gen en_US.UTF-8"
+# - $SH "apt-get install -y locales"
+# - $SH "locale-gen en_US.UTF-8"
  - $SH "apt-get install -y software-properties-common"
  - $SH "add-apt-repository -y ppa:deadsnakes/ppa"
  - $SH "apt-get update"
