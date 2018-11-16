@@ -1,9 +1,19 @@
-os: linux
-dist: xenial
 language: cpp
 
+sudo: required
+
+services:
+  - docker
+
+env: SH="docker exec -t ubuntu-test bash -c"
+
+before_install:
+  - docker run -d --name ubuntu-test -e LC_ALL="en_US.UTF-8" -e LANG="en_US.UTF-8" -v $(pwd):/travis -w /travis ubuntu:latest tail -f /dev/null
+  - docker ps
+
 install:
- - pip install --user cpp-coveralls
+ - $SH "python3 -m pip install -q --upgrade pip"
+ - $SH "python3 -m pip install -q cpp-coveralls"
 
 addons:
   apt:
@@ -12,7 +22,7 @@ addons:
     - lcov
 
 script:
- - scripts/build.sh && scripts/test.sh
+ - $SH "scripts/build.sh && scripts/test.sh"
 
-after_success:
- - coveralls --root . -E ".*usr.*" -E ".*third_party.*" -E ".*CMakeFiles.*" -E ".*include.*"
+#after_success:
+# - $SH "coveralls --root . -E \".*usr.*\" -E \".*third_party.*\" -E \".*CMakeFiles.*\" -E \".*include.*\""
