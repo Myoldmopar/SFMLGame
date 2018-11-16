@@ -37,14 +37,19 @@ int main()
     sf::Sprite redGuySprite(texture2, redGuyRectangle);
     redGuySprite.setPosition(c.initialWidth / 2.0f, c.initialHeight / 2.0f);
 
-//    sf::Font font;
-//    font.loadFromFile("media/fonts/8bit_wonder/8BITWONDER.TTF");
-//    sf::Text text;
-//    text.setFont(font);
-//    std::stringstream ss;
+    sf::Font font;
+    font.loadFromFile("media/fonts/8bit_wonder/8BITWONDER.TTF");
+    sf::Text text;
+    text.setFont(font);
+    text.setString("POW");
+    text.setPosition(c.initialWidth * 2.0f / 3.0f, 10);
+    text.setFillColor(sf::Color::Red);
 
     sf::Event event{};
     sf::Clock clock;
+    sf::Clock powClock;
+    bool showPow = false;
+    float powTime = 1.0f;
 
     bool redGuyGoingUp = true;
 
@@ -67,7 +72,11 @@ int main()
                     // key pressed
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Space) {
-                        sound.play();
+                        if (!showPow) {
+                            sound.play();
+                            powClock.restart();
+                            showPow = true;
+                        }
                     }
                     break;
 
@@ -82,7 +91,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             redGuyRectangle.top = 0*fullSpriteSquareSideLength + spriteSquareBorderThickness;
-            redGuySprite.move(0, 1);
+            redGuySprite.move(0, 0.25);
             if ((redGuyPosition.y + fullSpriteSquareSideLength) > window.getSize().y) {
                 redGuySprite.setPosition(redGuyPosition.x, window.getSize().y - fullSpriteSquareSideLength);
             }
@@ -90,7 +99,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             redGuyRectangle.top = 1*fullSpriteSquareSideLength + spriteSquareBorderThickness;
-            redGuySprite.move(-1, 0);
+            redGuySprite.move(float(-0.25), 0);
             if (redGuyPosition.x <= 0) {
                 redGuySprite.setPosition(0, redGuyPosition.y);
             }
@@ -98,7 +107,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             redGuyRectangle.top = 2*fullSpriteSquareSideLength + spriteSquareBorderThickness;
-            redGuySprite.move(1, 0);
+            redGuySprite.move(0.25, 0);
             if ((redGuyPosition.x + fullSpriteSquareSideLength) > window.getSize().x) {
                 redGuySprite.setPosition(window.getSize().x - fullSpriteSquareSideLength, redGuyPosition.y);
             }
@@ -106,7 +115,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             redGuyRectangle.top = 3*fullSpriteSquareSideLength + spriteSquareBorderThickness;
-            redGuySprite.move(0, -1);
+            redGuySprite.move(0, float(-0.25));
             if (redGuyPosition.y <= 0) {
                 redGuySprite.setPosition(redGuyPosition.x, 0);
             }
@@ -133,12 +142,20 @@ int main()
             clock.restart();
         }
 
+        if (powClock.getElapsedTime().asSeconds() > powTime) {
+            showPow = false;
+        }
+
         // then draw the appropriate region of the sprite sheet
         redGuySprite.setTextureRect(redGuyRectangle);
 
         window.clear();
+
+        if (showPow) {
+            window.draw(text);
+        }
         window.draw(redGuySprite);
-        // window.draw(text);
+
         window.display();
 
     }
