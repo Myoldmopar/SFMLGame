@@ -39,6 +39,7 @@ if (BUILD_TESTING)
     # Create a copy of the original *not main* list
     set(TEST_SRC ${SRC_NOT_MAIN})
     list(APPEND TEST_SRC
+            test/src/test_config.cpp
             test/src/test_utilities.cpp
             test/src/test.cpp
     )
