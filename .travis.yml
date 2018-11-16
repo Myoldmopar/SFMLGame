@@ -25,4 +25,4 @@ script:
  - $SH "scripts/build.sh && scripts/test.sh"
 
 after_success:
- - $SH "coveralls --root . -E \".*usr.*\" -E \".*third_party.*\" -E \".*CMakeFiles.*\" -E \".*include.*\""
+ - coveralls --root . -E \".*usr.*\" -E \".*third_party.*\" -E \".*CMakeFiles.*\" -E \".*include.*\"
