@@ -15,7 +15,7 @@ install:
  - $SH "apt-get update"
  - $SH "apt-get install -y locales"
  - $SH "locale-gen en_US.UTF-8"
- - $SH "apt-get install -y libsfml-dev lcov cmake"
+ - $SH "apt-get install -y libsfml-dev lcov cmake build-essential"
 
 script:
  - $SH "scripts/build.sh && scripts/test.sh"
