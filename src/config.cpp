@@ -1,6 +1,6 @@
 #include <config.hpp>
 
 Configuration::Configuration() :
-        initialHeight(400),
-        initialWidth(400)
+        initialHeight(600),
+        initialWidth(800)
 {};
